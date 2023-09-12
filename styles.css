@@ -28,3 +28,16 @@ label{
 body {
     background-image: url(./images/4786506.jpg);
 }
+#submit{
+    border: 3px solid #0e0505;
+    height: 35px;
+    border-radius: 12px;
+    font-size: 16px;
+}
+#submit:hover{
+    background-color: rgb(89, 181, 154);
+}
+.error-message{
+    display: none;
+    color: red;
+}
