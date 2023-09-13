@@ -6,18 +6,13 @@ const zipcode = document.getElementById('zipcode');
 const country = document.getElementById('country');
 const countryError = document.getElementById("country-error"); // Declare countryError here
 
-function validateEmail() {
-    const emailError = document.getElementById("email-error");
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-    if (!email.value.match(emailPattern)) {
-        email.setCustomValidity("Invalid email address");
-        emailError.style.display = "block";
-    } else {
-        email.setCustomValidity("");
-        emailError.style.display = "none";
-    }
-}
+email.addEventListener("input", (event) => {
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity("I am expecting an email address!");
+  } else {
+    email.setCustomValidity("");
+  }
+});
 
 // Event listeners for validation
 const fields = document.querySelectorAll("input");
