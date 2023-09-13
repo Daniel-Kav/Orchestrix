@@ -6,6 +6,7 @@
     <title>Form</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
+    <script defer src="main.js"></script>
 </head>
 <body>
     <div class="form">
@@ -15,8 +16,11 @@
             <span class="error-message" id="email-error">Please enter a valid email address.</span>
             <label for="country">Country:</label>
             <input type="text" id="country" name="country" placeholder="Enter your country">
+            <span class="error-message" id="country-error">Please enter your country.</span>
+
             <label for="zipcode">ZIP Code:</label>
             <input type="text" id="zipcode" name="zipcode" placeholder="Enter your ZIP Code" maxlength="10">
+            <span class="error-message" id="zipcode-error">Please enter a valid zip code.</span>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" minlength="8" required>
             <label for="confirm-password">Confirm Password:</label>
