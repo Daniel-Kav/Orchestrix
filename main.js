@@ -22,7 +22,7 @@ fields.forEach((field) => {
     });
 });
 
-// Form submission handler
+// Form submision handler
 form.addEventListener("submit", (event) => {
     event.preventDefault(); // Prevent form submission for this example
     fields.forEach((field) => field.checkValidity());
