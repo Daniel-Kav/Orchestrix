@@ -66,7 +66,7 @@ importers:
         specifier: ^8.1.0
         version: 8.2.0
       react:
-        specifier: ^18
+        specifier: ^18.3.1
         version: 18.3.1
       react-datepicker:
         specifier: ^4.24.0
@@ -97,10 +97,10 @@ importers:
         version: 3.24.1
     devDependencies:
       '@types/node':
-        specifier: ^20
+        specifier: ^20.17.14
         version: 20.17.14
       '@types/react':
-        specifier: ^18
+        specifier: ^18.3.18
         version: 18.3.18
       '@types/react-datepicker':
         specifier: ^4.19.3
