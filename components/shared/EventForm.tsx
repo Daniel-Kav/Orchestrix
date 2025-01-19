@@ -64,7 +64,18 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
     if(type === 'Create') {
       try {
         const newEvent = await createEvent({
-          event: { ...values, imageUrl: uploadedImageUrl },
+          event: { 
+            title: values.title || "", 
+            description: values.description || "", 
+            location: values.location || "", 
+            imageUrl: uploadedImageUrl, 
+            startDateTime: values.startDateTime || new Date(), 
+            endDateTime: values.endDateTime || new Date(), 
+            categoryId: values.categoryId || "", 
+            price: values.price || "", 
+            isFree: values.isFree || false, 
+            url: values.url || "" 
+          },
           userId,
           path: '/profile'
         })
@@ -87,7 +98,19 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
       try {
         const updatedEvent = await updateEvent({
           userId,
-          event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
+          event: { 
+            _id: eventId,
+            title: values.title || "", 
+            description: values.description || "", 
+            location: values.location || "", 
+            imageUrl: uploadedImageUrl, 
+            startDateTime: values.startDateTime || new Date(), 
+            endDateTime: values.endDateTime || new Date(), 
+            categoryId: values.categoryId || "", 
+            price: values.price || "", 
+            isFree: values.isFree || false, 
+            url: values.url || "" 
+          },
           path: `/events/${eventId}`
         })
 
