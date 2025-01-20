@@ -5,16 +5,19 @@ const Footer = () => {
   return (
     <footer className="border-t">
       <div className="flex-center wrapper flex-between flex flex-col gap-4 p-5 text-center sm:flex-row ">
-        <Link href='/' >
+        <Link href='/' className="flex items-center">
           <Image className="ml-3"
             src="/assets/images/logo.svg"
             alt="logo"
-            width={128}
-            height={38}
+            width={50}
+            height={28}
           />
+          <span className="ml-2 text-xl font-bold">Orchestrix</span>
         </Link>
 
-        <p className="mr-3">2023 Evently. All Rights reserved.</p>
+      <p className="text-sm text-gray-500">
+        © 2025 Orchestrix. All rights reserved. Built with love by the Orchestrix team.
+      </p>
       </div>
     </footer>
   )
