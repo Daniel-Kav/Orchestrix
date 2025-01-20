@@ -14,12 +14,12 @@ import { FileUploader } from "./FileUploader"
 import { useState } from "react"
 import Image from "next/image"
 import DatePicker from "react-datepicker";
-import { useUploadThing } from '../../lib/uploadthing'
+import { useUploadThing } from "../../lib/uploadthing"
 
 import "react-datepicker/dist/react-datepicker.css";
 import { Checkbox } from "../ui/checkbox"
 import { useRouter } from "next/navigation"
-import { createEvent, updateEvent } from "../../lib/actions/event.actions"
+import { createEvent, updateEvent  } from "../../lib/actions/event.actions"
 import { IEvent } from "../../lib/database/models/event.model"
 
 
@@ -30,7 +30,7 @@ type EventFormProps = {
   eventId?: string
 }
 
-const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
+const EventForm = ({ userId, type, event, eventId }) => {
   const [files, setFiles] = useState<File[]>([])
   const initialValues = event && type === 'Update' 
     ? { 
@@ -64,18 +64,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
     if(type === 'Create') {
       try {
         const newEvent = await createEvent({
-          event: { 
-            title: values.title || "", 
-            description: values.description || "", 
-            location: values.location || "", 
-            imageUrl: uploadedImageUrl, 
-            startDateTime: values.startDateTime || new Date(), 
-            endDateTime: values.endDateTime || new Date(), 
-            categoryId: values.categoryId || "", 
-            price: values.price || "", 
-            isFree: values.isFree || false, 
-            url: values.url || "" 
-          },
+          event: { ...values, imageUrl: uploadedImageUrl },
           userId,
           path: '/profile'
         })
@@ -98,19 +87,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
       try {
         const updatedEvent = await updateEvent({
           userId,
-          event: { 
-            _id: eventId,
-            title: values.title || "", 
-            description: values.description || "", 
-            location: values.location || "", 
-            imageUrl: uploadedImageUrl, 
-            startDateTime: values.startDateTime || new Date(), 
-            endDateTime: values.endDateTime || new Date(), 
-            categoryId: values.categoryId || "", 
-            price: values.price || "", 
-            isFree: values.isFree || false, 
-            url: values.url || "" 
-          },
+          event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
           path: `/events/${eventId}`
         })
 

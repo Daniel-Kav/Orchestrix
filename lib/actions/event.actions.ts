@@ -28,7 +28,7 @@ const populateEvent = (query: any) => {
 }
 
 // CREATE
-export async function createEvent({ userId, event, path }: CreateEventParams) {
+export async function createEvent({ userId, event, path }) {
   try {
     await connectToDatabase()
 
@@ -60,7 +60,7 @@ export async function getEventById(eventId: string) {
 }
 
 // UPDATE
-export async function updateEvent({ userId, event, path }: UpdateEventParams) {
+export async function updateEvent({ userId, event, path }) {
   try {
     await connectToDatabase()
 
