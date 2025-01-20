@@ -30,7 +30,7 @@ type EventFormProps = {
   eventId?: string
 }
 
-const EventForm = ({ userId, type, event, eventId }) => {
+const EventForm = ({ userId, type, event, eventId }: any) => {
   const [files, setFiles] = useState<File[]>([])
   const initialValues = event && type === 'Update' 
     ? { 
