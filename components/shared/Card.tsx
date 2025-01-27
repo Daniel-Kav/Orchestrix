@@ -1,28 +1,34 @@
-import { IEvent } from '../../lib/database/models/event.model'
-import { formatDateTime } from '../../lib/utils'
-import { auth } from '@clerk/nextjs'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-import { DeleteConfirmation } from './DeleteConfirmation'
+import { IEvent } from '../../lib/database/models/event.model';
+import { formatDateTime } from '../../lib/utils';
+import { auth } from '@clerk/nextjs';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import { DeleteConfirmation } from './DeleteConfirmation';
 
 type CardProps = {
-  event: IEvent,
-  hasOrderLink?: boolean,
-  hidePrice?: boolean
-}
+  event: IEvent;
+  hasOrderLink?: boolean;
+  hidePrice?: boolean;
+};
 
 const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
   const { sessionClaims } = auth();
   const userId = sessionClaims?.userId as string;
 
-  const isEventCreator = userId === event.organizer._id.toString();
+  // Safely check if event.organizer exists before accessing its properties
+  const isEventCreator = userId === event.organizer?._id?.toString();
+
+  // If event.organizer is null or undefined, don't render the card
+  if (!event.organizer) {
+    return <div>Invalid event data: Organizer information is missing.</div>;
+  }
 
   return (
     <div className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg hover:bg-[#0c34fc1a] md:min-h-[438px]">
-      <Link 
+      <Link
         href={`/events/${event._id}`}
-        style={{backgroundImage: `url(${event.imageUrl})`}}
+        style={{ backgroundImage: `url(${event.imageUrl})` }}
         className="flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500"
       />
       {/* IS EVENT CREATOR ... */}
@@ -37,17 +43,17 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
         </div>
       )}
 
-      <div
-        className="flex min-h-[230px] flex-col gap-3 p-5 md:gap-4"
-      > 
-       {!hidePrice && <div className="flex gap-2">
-          <span className="p-semibold-14 w-min whitespace-nowrap rounded-full bg-green-100 px-4 py-1 text-green-60">
-            {event.isFree ? 'FREE' : `KSH ${event.price}`}
-          </span>
-          <p className="p-semibold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
-            {event.category.name}
-          </p>
-        </div>}
+      <div className="flex min-h-[230px] flex-col gap-3 p-5 md:gap-4">
+        {!hidePrice && (
+          <div className="flex gap-2">
+            <span className="p-semibold-14 w-min whitespace-nowrap rounded-full bg-green-100 px-4 py-1 text-green-60">
+              {event.isFree ? 'FREE' : `KSH ${event.price}`}
+            </span>
+            <p className="p-semibold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
+              {event.category.name}
+            </p>
+          </div>
+        )}
 
         <p className="p-medium-16 p-medium-18 text-grey-500">
           {formatDateTime(event.startDateTime).dateTime}
@@ -71,7 +77,7 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;
